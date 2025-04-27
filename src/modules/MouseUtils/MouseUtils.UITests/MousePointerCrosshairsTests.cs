@@ -88,7 +88,7 @@ namespace MouseUtils.UITests
             xy0 = Session.GetMousePosition();
             Session.MoveMouseTo(xy0.Item1 - 200, xy0.Item2 - 70);
 
-            // Session.PerformMouseAction(MouseActionType.LeftClick);
+            Session.PerformMouseAction(MouseActionType.LeftClick);
             VerifyMousePointerCrosshairsAppears(ref settings);
             Task.Delay(500).Wait();
 
