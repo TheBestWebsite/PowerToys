@@ -86,13 +86,14 @@ namespace MouseUtils.UITests
             VerifyMousePointerCrosshairsAppears(ref settings);
             Task.Delay(500).Wait();
             xy0 = Session.GetMousePosition();
-            Session.MoveMouseTo(xy0.Item1 - 100, xy0.Item2 - 50);
-            Session.PerformMouseAction(MouseActionType.LeftClick);
+            Session.MoveMouseTo(xy0.Item1 - 200, xy0.Item2 - 70);
+
+            // Session.PerformMouseAction(MouseActionType.LeftClick);
             VerifyMousePointerCrosshairsAppears(ref settings);
             Task.Delay(500).Wait();
 
-            xy0 = Session.GetMousePosition();
-            Session.MoveMouseTo(xy0.Item1 - 200, xy0.Item2 - 50);
+            // xy0 = Session.GetMousePosition();
+            Session.MoveMouseTo(xy0.Item1 - 300, xy0.Item2);
             Task.Delay(1000).Wait();
             VerifyMousePointerCrosshairsAppears(ref settings);
 
@@ -140,7 +141,7 @@ namespace MouseUtils.UITests
             int radius = int.Parse(settings.CenterRadius, CultureInfo.InvariantCulture);
 
             var color = Session.GetPixelColorString(location.Item1, location.Item2);
-            Assert.AreEqual(expectedColor, color, "Center color check failed");
+            Assert.AreEqual(expectedColor, color, "Center color check failed new");
 
             var colorX = Session.GetPixelColorString(location.Item1 + 50, location.Item2);
             Assert.AreEqual(expectedColor, colorX, "Center x + 50 color check failed");
