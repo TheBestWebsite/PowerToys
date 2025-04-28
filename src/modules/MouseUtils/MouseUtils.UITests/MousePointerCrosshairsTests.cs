@@ -86,7 +86,15 @@ namespace MouseUtils.UITests
             VerifyMousePointerCrosshairsAppears(ref settings);
             Task.Delay(500).Wait();
             xy0 = Session.GetMousePosition();
-            Session.MoveMouseTo(xy0.Item1 - 200, xy0.Item2 - 70);
+            Session.MoveMouseTo(xy0.Item1 - 20, xy0.Item2 - 70);
+            Task.Delay(500).Wait();
+            Session.MoveMouseTo(xy0.Item1 - 50, xy0.Item2 - 70);
+            Task.Delay(500).Wait();
+            Session.MoveMouseTo(xy0.Item1 - 100, xy0.Item2 - 70);
+            Task.Delay(500).Wait();
+            Session.MoveMouseTo(xy0.Item1 - 120, xy0.Item2 - 70);
+            Task.Delay(500).Wait();
+            Session.MoveMouseTo(xy0.Item1 - 150, xy0.Item2 - 70);
 
             Session.PerformMouseAction(MouseActionType.LeftClick);
             VerifyMousePointerCrosshairsAppears(ref settings);
