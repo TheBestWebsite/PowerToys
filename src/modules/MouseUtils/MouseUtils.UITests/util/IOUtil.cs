@@ -147,6 +147,9 @@ namespace MouseUtils.UITests
             _ = SendInput(1, inputs, INPUT.Size);
         }
 
+        [DllImport("user32.dll")]
+        private static extern IntPtr GetMessageExtraInfo();
+
         public static void MoveMouseBy(int dx, int dy)
         {
             var input = new INPUT
@@ -161,7 +164,7 @@ namespace MouseUtils.UITests
                         mouseData = 0,
                         dwFlags = (uint)MouseEventF.MOVE,
                         time = 0,
-                        dwExtraInfo = UIntPtr.Zero,
+                        dwExtraInfo = (nuint)GetMessageExtraInfo(),
                     },
                 },
             };
