@@ -136,13 +136,15 @@ namespace MouseUtils.UITests
             if (action == "leftClick")
             {
                 // MouseSimulator.LeftDown();
-                Session.PerformMouseAction(MouseActionType.LeftDown);
+                // Session.PerformMouseAction(MouseActionType.LeftDown);
+                IOUtil.SimulateMouseDown(true);
                 expectedColor = settings.PrimaryButtonHighlightColor.Substring(2);
             }
             else if (action == "rightClick")
             {
                 // MouseSimulator.RightDown();
-                Session.PerformMouseAction(MouseActionType.RightDown);
+                // Session.PerformMouseAction(MouseActionType.RightDown);
+                IOUtil.SimulateMouseDown(false);
                 expectedColor = settings.SecondaryButtonHighlightColor.Substring(2);
             }
             else
@@ -165,7 +167,7 @@ namespace MouseUtils.UITests
             Assert.AreNotEqual(expectedColor, colorBackground);
 
             // Drag the mouse
-            Session.MoveMouseTo(location.Item1 - 200, location.Item2);
+            Session.MoveMouseTo(location.Item1 - 400, location.Item2);
             Task.Delay(2000).Wait();
 
             location = Session.GetMousePosition();
@@ -182,12 +184,14 @@ namespace MouseUtils.UITests
             if (action == "leftClick")
             {
                 // MouseSimulator.LeftUp();
-                Session.PerformMouseAction(MouseActionType.LeftUp);
+                // Session.PerformMouseAction(MouseActionType.LeftUp);
+                IOUtil.SimulateMouseUp(true);
             }
             else if (action == "rightClick")
             {
                 // MouseSimulator.RightUp();
-                Session.PerformMouseAction(MouseActionType.RightUp);
+                // Session.PerformMouseAction(MouseActionType.RightUp);
+                IOUtil.SimulateMouseUp(false);
             }
 
             int duration = int.Parse(settings.FadeDuration, CultureInfo.InvariantCulture);
