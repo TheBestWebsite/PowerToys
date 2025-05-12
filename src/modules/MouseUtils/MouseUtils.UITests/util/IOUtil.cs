@@ -147,6 +147,61 @@ namespace MouseUtils.UITests
             _ = SendInput(1, inputs, INPUT.Size);
         }
 
+        public static void MoveMouseBy(int dx, int dy)
+        {
+            var input = new INPUT
+            {
+                type = INPUTTYPE.INPUT_MOUSE,
+                data = new InputUnion
+                {
+                    mi = new MOUSEINPUT
+                    {
+                        dx = dx,
+                        dy = dy,
+                        mouseData = 0,
+                        dwFlags = (uint)MouseEventF.MOVE,
+                        time = 0,
+                        dwExtraInfo = UIntPtr.Zero,
+                    },
+                },
+            };
+
+            INPUT[] inputs = [input];
+            _ = SendInput(1, inputs, INPUT.Size);
+        }
+
+        [DllImport("user32.dll")]
+        private static extern int GetSystemMetrics(int nIndex);
+
+        public static void MoveMouseTo(int x, int y)
+        {
+            int screenWidth = GetSystemMetrics(0);
+            int screenHeight = GetSystemMetrics(1);
+
+            int normalizedX = (int)(x * 65535 / screenWidth);
+            int normalizedY = (int)(y * 65535 / screenHeight);
+
+            var input = new INPUT
+            {
+                type = INPUTTYPE.INPUT_MOUSE,
+                data = new InputUnion
+                {
+                    mi = new MOUSEINPUT
+                    {
+                        dx = normalizedX,
+                        dy = normalizedY,
+                        mouseData = 0,
+                        dwFlags = (uint)(MouseEventF.MOVE | MouseEventF.ABSOLUTE),
+                        time = 0,
+                        dwExtraInfo = UIntPtr.Zero,
+                    },
+                },
+            };
+
+            INPUT[] inputs = [input];
+            _ = SendInput(1, inputs, INPUT.Size);
+        }
+
         private void SendSingleKeyboardInput(short keyCode, uint keyStatus)
         {
             var inputShift = new INPUT

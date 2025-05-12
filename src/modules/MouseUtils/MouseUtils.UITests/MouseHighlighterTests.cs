@@ -167,7 +167,8 @@ namespace MouseUtils.UITests
             Assert.AreNotEqual(expectedColor, colorBackground);
 
             // Drag the mouse
-            Session.MoveMouseTo(location.Item1 - 400, location.Item2);
+            // Session.MoveMouseTo(location.Item1 - 400, location.Item2);
+            IOUtil.MoveMouseBy(-100, 0);
             Task.Delay(2000).Wait();
 
             location = Session.GetMousePosition();
