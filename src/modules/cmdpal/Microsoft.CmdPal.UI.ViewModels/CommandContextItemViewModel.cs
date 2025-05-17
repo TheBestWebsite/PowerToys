@@ -13,8 +13,6 @@ public partial class CommandContextItemViewModel(ICommandContextItem contextItem
 
     public new ExtensionObject<ICommandContextItem> Model { get; } = new(contextItem);
 
-    public bool IsCritical { get; private set; }
-
     public KeyChord? RequestedShortcut { get; private set; }
 
     public bool HasRequestedShortcut => RequestedShortcut != null && (RequestedShortcut.Value != nullKeyChord);
@@ -34,7 +32,7 @@ public partial class CommandContextItemViewModel(ICommandContextItem contextItem
             return; // throw?
         }
 
-        IsCritical = contextItem.IsCritical;
+        // IsCritical = contextItem.IsCritical;
 
         // I actually don't think this will ever actually be null, because
         // KeyChord is a struct, which isn't nullable in WinRT

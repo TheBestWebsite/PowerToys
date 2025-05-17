@@ -27,6 +27,7 @@
                 TrueValue="Collapsed" />
 
             <cmdpalUI:MessageStateToSeverityConverter x:Key="MessageStateToSeverityConverter" />
+            <cmdpalUI:IsCriticalToForegroundConverter x:Key="IsCriticalToForegroundConverter" />
             <cmdpalUI:KeyChordToStringConverter x:Key="KeyChordToStringConverter" />
 
             <StackLayout
@@ -48,6 +49,7 @@
                         Margin="4,0,0,0"
                         HorizontalAlignment="Left"
                         SourceKey="{x:Bind Icon, Mode=OneWay}"
+                        Foreground="{x:Bind IsCritical, Mode=OneWay, Converter={StaticResource IsCriticalToForegroundConverter}}"
                         SourceRequested="{x:Bind help:IconCacheProvider.SourceRequested}" />
                     <TextBlock
                         Grid.Column="1"
@@ -58,7 +60,7 @@
                         Margin="16,0,0,0"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center"
-                        Foreground="{ThemeResource MenuFlyoutItemKeyboardAcceleratorTextForeground}"
+                        Foreground="{x:Bind IsCritical, Mode=OneWay, Converter={StaticResource IsCriticalToForegroundConverter}}"
                         Style="{StaticResource CaptionTextBlockStyle}"
                         Text="{x:Bind RequestedShortcut, Mode=OneWay, Converter={StaticResource KeyChordToStringConverter}}" />
                 </Grid>
@@ -149,6 +151,7 @@
                 AutomationProperties.Name="{x:Bind ViewModel.PrimaryCommand.Name, Mode=OneWay}"
                 Background="Transparent"
                 Style="{StaticResource SubtleButtonStyle}"
+                Foreground="{x:Bind ViewModel.PrimaryCommand.IsCritical, Mode=OneWay, Converter={StaticResource IsCriticalToForegroundConverter}}"
                 Tapped="PrimaryButton_Tapped"
                 Visibility="{x:Bind ViewModel.HasPrimaryCommand, Mode=OneWay}">
                 <StackPanel Orientation="Horizontal" Spacing="8">
@@ -177,6 +180,7 @@
                 x:Load="{x:Bind IsLoaded, Mode=OneWay}"
                 AutomationProperties.Name="{x:Bind ViewModel.SecondaryCommand.Name, Mode=OneWay}"
                 Style="{StaticResource SubtleButtonStyle}"
+                Foreground="{x:Bind ViewModel.SecondaryCommand.IsCritical, Mode=OneWay, Converter={StaticResource IsCriticalToForegroundConverter}}"
                 Tapped="SecondaryButton_Tapped"
                 Visibility="{x:Bind ViewModel.HasSecondaryCommand, Mode=OneWay}">
                 <StackPanel Orientation="Horizontal" Spacing="8">
